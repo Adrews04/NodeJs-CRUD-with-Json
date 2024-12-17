@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-crud-with-json",
+  "version": "1.0.0",
+  "description": "This is a practice of creating a CRUD using NodeJs with data stored in a Json file",
+  "main": "index.js",
+  "exports": "./dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "pkgroll",
+    "start": "node dsit/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "pkgroll": "^2.5.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.9"
+  }
+}
