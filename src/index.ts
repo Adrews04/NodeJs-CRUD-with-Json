@@ -1,6 +1,12 @@
+import express from 'express'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { nanoid } from 'nanoid'
+
+const app = express()
+app.use(express.json())
+const PORT = 3000
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
 
 const __dirname = import.meta.dirname
 
@@ -82,21 +88,41 @@ const updateBook = async (updatedBook: Book) => {
     }
 }
 
-//KjMJFJ_rA54Gzo_hSpH15
-await updateBook( 
-    {
-        id: 'p6or5YJhAsbQg6sgC_PLa',
-        title: 'title 1',
-        price: 50
+app.get('/', async (req, res) => {
+    try {
+        const books = await readFile()
+        res.json(books)
+    } catch (error) {
+        console.log(error)
     }
-)
-
-await addBook({
-    id: nanoid(),
-    title: 'title 2',
-    price: 200
 })
 
-await getBooks()
+app.post('/', async (req, res) => {
+    try {
+        const newBook = req.body
+        await addBook(newBook)
+        res.json(newBook)
+    } catch (error) {
+        console.log(error)
+    }
+})
 
-await deleteBook('title 2')
+app.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        await deleteBook(id)
+        res.json({ message: 'Book deleted' })
+    } catch (error) {
+        console.log(error)
+    }
+})  
+
+app.put('/:id', async (req, res) => {
+    try {
+        const updatedBook = req.body
+        await updateBook(updatedBook)
+        res.json(updatedBook)
+    } catch (error) {
+        console.log(error)
+    }
+})
