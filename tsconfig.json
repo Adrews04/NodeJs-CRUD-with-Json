@@ -6,8 +6,8 @@
         "moduleDetection":"force",
         "module":"Preserve",
         "resolveJsonModule":true,
-        "allowsJs": true,
+        "allowJs": true,
         "esModuleInterop": true,
-        "isolateModules":true
+        "isolatedModules":true
     }
 }
